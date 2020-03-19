@@ -1,0 +1,96 @@
+%!TEX program = xelatex
+\title          {Logic in Computer Science(Homework 4)}
+\author         {10175101148 Junjie Chen}
+
+\documentclass{article}
+\usepackage{boxproof}
+\usepackage{a4wide}
+% \usepackage{daymonthyear}
+
+\def\meta#1{\mbox{$\langle\hbox{#1}\rangle$}}
+\def\macrowitharg#1#2{{\tt\string#1\bra\meta{#2}\ket}}
+
+{\escapechar-1 \xdef\bra{\string\{}\xdef\ket{\string\}}}
+
+\showboxbreadth 999
+\showboxdepth 999
+\tracingoutput 1
+
+
+\let\imp\to
+
+\def\premise{\mathrm{premise}}
+\def\assumption{\mathrm{assumption}}
+\def\MT{\mathrm{MT\ }}
+\def\LEM{\mathrm{LEM}}
+\def\intro{\mathrm{i\ }}
+\def\elim{\mathrm{e\ }}
+\def\introa{\mathrm{i_1\ }}
+\def\elima{\mathrm{e_1\ }}
+\def\introb{\mathrm{i_2\ }}
+\def\elimb{\mathrm{e_2\ }}
+
+\def\lt{<}
+\def\eqdef{=}
+\def\eps{\mathrel{\epsilon}}
+\def\biimplies{\leftrightarrow}
+\def\flt#1{\mathrel{{#1}^\flat}}
+\def\setof#1{{\left\{{#1}\right\}}}
+\let\implies\to
+\def\KK{{\mathsf K}}
+\let\squashmuskip\relax
+
+%=======================================================================
+\begin{document}
+\maketitle
+%=======================================================================
+\section{Prove the following theroems with deduction rules.}
+\subsection{$\forall x(P(x) \rightarrow \neg Q(x)) \vdash \neg(\exists x(P(x) \wedge Q(x)))$}
+Proof:\\
+$$
+\begin{proofbox}
+   \: \forall x(P(x)\rightarrow \neg Q(x)) \= \premise\\
+   \[
+      \: \exists x(P(x)\wedge Q(x)) \= \assumption\\
+      \[
+         x_0 \: P(x_0)\wedge Q(x_0) \= \assumption\\
+         \: P(x_0) \= \wedge\elima 3\\
+         \: Q(x_0) \= \wedge\elimb 3\\
+         \: P(x_0) \rightarrow \neg Q(x_0) \= \forall x\ \elim 1\\
+         \: \neg Q(x_0) \= \rightarrow\elim 4,6\\
+         \: \bot \= \neg \elim 5,7
+      \]
+      \: \bot \= \exists x\ \elim 2,3-8\\
+   \]
+   \: \neg(\exists(P(x)\wedge Q(x))) \=\neg\intro 2-9 
+\end{proofbox}$$
+\subsection{$\forall x(P(x) \leftrightarrow x=b) \vdash P(b) \wedge \forall x \forall y(P(x) \wedge P(y) \rightarrow x=y)$}
+Proof:\\
+$$
+\begin{proofbox}
+   \: \forall x(P(x) \leftrightarrow x=b) \= \premise\\
+   \: b=b \= =\intro\\
+   \: b=b\rightarrow P(b) \= \forall x\ \elim 1\\
+   \: P(b) \= \rightarrow\elim 2,3
+   \[
+      x_0\: P(x_0)\rightarrow x_0=b \= \forall x\ \elim 1\\
+      \[
+         y_0 \: P(y_0)\rightarrow y_0=b \= \forall x\ \elim 1\\
+         \[
+            \: P(x_0) \wedge P(y_0) \= \assumption \\
+            \: P(x_0) \= \wedge\elima 7\\
+            \: P(y_0) \= \wedge\elimb 7\\
+            \: x_0=b \= \rightarrow\elim 5,8\\
+            \: y_0=b \= \rightarrow\elim 6,9\\
+            \: x_0=y_0 \= =\elim 10,11
+         \]
+         \: P(x_0)\wedge P(y_0) \rightarrow  x_0=y_0 \= \rightarrow\intro 7-12
+      \]
+      \: \forall y (P(x_0)\wedge P(y)\rightarrow x_0=y) \= \forall y\ \intro 6-13
+   \]
+   \: \forall x\forall y (P(x)\wedge P(y)\rightarrow x=y) \= \forall x\ \intro 5-14\\
+   \: P(b) \wedge \forall x \forall y(P(x) \wedge P(y) \rightarrow x=y) \= \wedge\intro 4,15
+\end{proofbox}$$
+\end{document}
+
+

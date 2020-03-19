@@ -1,0 +1,283 @@
+%!TEX program = xelatex
+\title          {Logic in Computer Science(Homework 1)}
+\author         {10175101148 Junjie Chen}
+
+\documentclass{article}
+\usepackage{boxproof}
+\usepackage{a4wide}
+% \usepackage{daymonthyear}
+
+\def\meta#1{\mbox{$\langle\hbox{#1}\rangle$}}
+\def\macrowitharg#1#2{{\tt\string#1\bra\meta{#2}\ket}}
+
+{\escapechar-1 \xdef\bra{\string\{}\xdef\ket{\string\}}}
+
+\showboxbreadth 999
+\showboxdepth 999
+\tracingoutput 1
+
+
+\let\imp\to
+
+\def\premise{\mathrm{premise}}
+\def\assumption{\mathrm{assumption}}
+\def\MT{\mathrm{MT\ }}
+\def\LEM{\mathrm{LEM}}
+\def\intro{\mathrm{i\ }}
+\def\elim{\mathrm{e\ }}
+\def\introa{\mathrm{i_1\ }}
+\def\elima{\mathrm{e_1\ }}
+\def\introb{\mathrm{i_2\ }}
+\def\elimb{\mathrm{e_2\ }}
+
+\def\lt{<}
+\def\eqdef{=}
+\def\eps{\mathrel{\epsilon}}
+\def\biimplies{\leftrightarrow}
+\def\flt#1{\mathrel{{#1}^\flat}}
+\def\setof#1{{\left\{{#1}\right\}}}
+\let\implies\to
+\def\KK{{\mathsf K}}
+\let\squashmuskip\relax
+
+%=======================================================================
+\begin{document}
+\maketitle
+%=======================================================================
+\section{Prove the following Theroems with nature deduction.}
+\subsection{\(\neg(p \wedge q) \dashv\vdash \neg q \vee \neg p\)}
+Proof:\\
+Left to right:
+$$
+\begin{proofbox}
+   \: \neg (p\land q) \= \premise\\
+   \: p\vee\neg p \= \LEM \\
+      \[
+         \: p \= \assumption\\
+         \[
+            \: q \= \assumption\\
+            \: p \land q \= \land\intro3,4\\
+            \: \bot \= \neg\elim1,5\\
+         \]
+         \: \neg q \= \neg\intro4-6\\
+         \: \neg q \vee \neg p \= \vee\introa 7\\
+      \]
+      \[
+         \: \neg p \= \assumption\\
+         \: \neg q \vee \neg p \= \vee\introb 9\\
+      \]
+      \: \neg q \vee \neg p \= \vee\elim 2,3-8,9-10\\
+\end{proofbox}$$
+Right to left:
+$$
+\begin{proofbox}
+   \: \neg q \vee \neg p \= \premise\\
+      \[
+         \: \neg q \= \assumption\\
+         \[
+            \: p\land q \= \assumption\\
+            \: q \= \land\elimb 3\\
+            \: \bot \= \neg\elim2,4\\
+         \]
+         \: \neg (p\land q) \= \neg\intro 3-5\\
+      \]
+      \[
+         \: \neg p \= \assumption\\
+         \[
+            \: p\land q \= \assumption\\
+            \: p \= \land\elima 8\\
+            \: \bot \= \neg\elim 7,9\\
+         \]
+         \: \neg (p\land q) \= \neg\intro 8-10\\
+      \]
+      \: \neg (p\land q) \= \vee\elim 1,2-6,7-11\\
+\end{proofbox}$$
+So \(\neg(p \wedge q) \dashv\vdash \neg q \vee \neg p\).
+
+\subsection{\(p \rightarrow q \dashv\vdash \neg q \rightarrow \neg p\)}
+Proof:\\
+Left to right:
+$$
+% \proofboxformulawidth=18em\relax
+\begin{proofbox}
+   \: p\to q \= \premise\\
+      \[
+         \: \neg q \= \assumption\\
+         \: \neg p \=  \MT1,2\\
+      \]
+   \: \neg q\to\neg p \= \to\intro2-3\\
+\end{proofbox}$$
+Right to left:
+$$
+\begin{proofbox}
+   \: \neg q\to\neg p \= \premise\\
+      \[
+         \: p \= \assumption\\
+         \: \neg\neg p \= \neg\neg\intro2\\
+         \: \neg\neg q \=  \MT1,3\\
+         \: q \= \neg\neg\elim4\\
+      \]
+   \: p\to q \= \to\intro2-5\\
+\end{proofbox}$$
+So \(p \rightarrow q \dashv\vdash \neg q \rightarrow \neg p\).
+\subsection{\(p \wedge q \rightarrow p \dashv\vdash r \vee \neg r\)}
+Proof:\\
+Left to right:
+$$
+% \proofboxformulawidth=18em\relax
+\begin{proofbox}
+   \: r\vee\neg r \= \LEM
+\end{proofbox}$$
+Right to left:
+$$
+\begin{proofbox}
+   \[
+      \: p\land q \= \assumption\\
+      \: p \= \land\elima1\\
+   \] 
+\: p\land q\to p \= \to\intro1-2\\
+\end{proofbox}$$
+So \(p \wedge q \rightarrow p \dashv\vdash r \vee \neg r\).
+
+% page 1: (a)
+
+% \begin{proofbox}
+%    \: P\land Q \\
+%    \: P         \= \elim\land\\
+% \end{proofbox}
+
+% \begin{proofbox}
+%    \lbl{1}\: P \\
+%    \[
+%       \: Q \\
+%       \: P \= (\ref{1}) \\
+%    \]
+%    \: Q\to P \= \intro\to \\
+% \end{proofbox}
+
+
+% page 2: (c)
+
+% \begin{proofbox}
+%    \lbl{2}\: P\\
+%    \[
+%       \lbl{3}\: Q\\
+%       \: P\land Q\= \intro\land(\ref{2},\ref{3}) \\
+%    \]
+%    \: Q\to(P\land Q) \= \intro\to \\
+% \end{proofbox}
+
+% (g)
+
+% \begin{proofbox}
+%    \lbl{6}\: P\to(Q\to R)\\
+%    \[
+%       \lbl{4}\: P\to Q\\
+%       \[
+%          \lbl{5}\: P\\
+%          \lbl{8}\: Q \= \elim\to(\ref{4},\ref{5})\\
+%          \lbl{7}\: Q\to R \= \elim\to(\ref{6},\ref{5})\\
+%          \: R \= \elim\to(\ref{7},\ref{8})\\
+%       \]
+%       \: P\to R \= \intro\to \\
+%    \]
+%    \: (P\to Q)\to(P\to R) \= \intro\to \\
+% \end{proofbox}
+
+% page 3: (h)
+
+% \begin{proofbox}
+%    \lbl{10}\: P\to(Q\to R)\\
+%    \[
+%       \lbl{9}\: P\land Q\\
+%       \lbl{11}\: P \= \elim\land1(\ref{9})\\
+%       \lbl{12}\: Q\to R \= \elim\to(\ref{10},\ref{11})\\
+%       \lbl{13}\: Q \=\elim\land2(\ref{9})\\
+%       \: R \=\elim\to(\ref{12},\ref{13})\\
+%    \]
+%       \: P\land Q\to R \= \intro\to \\
+% \end{proofbox}
+
+% (i)
+
+% \begin{proofbox}
+%    \lbl{16}\: P\land Q\to R \\
+%    \[
+%       \lbl{14}\: P \\
+%       \[
+%          \lbl{15}\: Q \\
+%          \lbl{17}\: P\land Q \= \intro\land(\ref{14},\ref{15})\\
+%          \: R \= \elim\to(\ref{16},\ref{17})
+%       \]
+%       \: Q\to R \= \intro\to \\
+%    \]
+%    \: P\to(Q\to R) \= \intro\to \\
+% \end{proofbox}
+
+% (j)
+
+% \begin{proofbox}
+%    \lbl{18}\: P\to Q\\
+%    \lbl{20}\: \lnot Q\\
+%    \[
+%       \lbl{19}\: P \\
+%       \lbl{21}\: Q \= \elim\to(\ref{18},\ref{19})\\
+%       \: \bot \= \elim\lnot(\ref{20},\ref{21})\\
+%    \]
+%    \: \lnot P \= \intro\lnot \\
+% \end{proofbox}
+
+% page 5: (k)
+
+% \begin{proofbox}
+%    \lbl{22}\: \lnot P\\
+%    \[
+%       \lbl{23}\: P\\
+%       \[
+%          \: \lnot Q\\
+%          \: \lnot P \land P \= \intro\land(\ref{22},\ref{23})\\
+%          \: \bot \= \elim\lnot(\ref{22},\ref{23})\\
+%       \]
+%       \: \lnot\lnot Q \= \intro\lnot\\
+%       \: Q \= \lnot\lnot\\
+%    \]
+%    \: P\to Q \= \intro\to \\
+% \end{proofbox}
+
+% page 8: (o)
+
+% \begin{proofbox}
+%    \lbl{24}\: P\to Q \\
+%    \[
+%       \lbl{26}\: \lnot Q \\
+%       \[
+%          \lbl{25}\: P \\
+%          \lbl{27}\: Q \= \elim\to(\ref{24},\ref{25})\\
+%          \: \bot \= \elim\lnot(\ref{26},\ref{27})\\
+%       \]
+%       \: \lnot P \= \intro\lnot\\
+%    \]
+%    \: \lnot Q\to \lnot P \= \intro\to \\
+% \end{proofbox}
+
+% (p) The $\lnot\lnot$ rule is unnecessary!
+
+% \begin{proofbox}
+%    \lbl{28}\: P\to Q \\
+%    \[
+%       \: \lnot\lnot P\\
+%       \lbl{29}\: P \= \lnot\lnot\\
+%       \[
+%          \lbl{31}\: \lnot Q \\
+%          \lbl{30}\: Q \= \elim\to(\ref{28},\ref{29})\\
+%          \: Q\land\lnot Q \= \intro\land(\ref{30},\ref{31})\\
+%          \: \bot \= \elim\lnot\\
+%       \]
+%       \: \lnot\lnot Q \= \intro\lnot\\
+%    \]
+%    \: \lnot\lnot P\to\lnot\lnot Q \= \intro\to \\
+% \end{proofbox}
+%=======================================================================
+\end{document}
+
+
