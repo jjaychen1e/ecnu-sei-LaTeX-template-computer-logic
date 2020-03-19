@@ -11,7 +11,7 @@
 
 另外，这个包和 `ctex` 有冲突，会导致排版错乱，如果你有任何解决方案，欢迎提出 `PR`.
 
-具体的例子参考 `example.tex` ，以及对应的 `example.pdf` 。更多细节请参考 `Paul Taylor’s LaTeX package/boxuser.pdf` 及其源码。**注意**，`example-1` 和 `example-2` 中没有使用它提供的根据标签自动生成行号的功能，因为我觉得对于作业程度的排版来说，不如直接写来得快。
+具体的例子参考 `example.tex` ，以及对应的 `example.pdf` 。更多细节请参考 `Paul Taylor’s LaTeX package/boxuser.pdf` 及其源码。**注意**，`example` 中没有使用它提供的根据标签自动生成行号的功能，因为我觉得对于作业程度的排版来说，不如直接写来得快。
 
 ## 修改日志
 
